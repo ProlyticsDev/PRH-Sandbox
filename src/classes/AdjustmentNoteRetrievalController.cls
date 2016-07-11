@@ -88,7 +88,7 @@ public with sharing class AdjustmentNoteRetrievalController {
     public void DoSearch(){
         
         string requestBody = util.getRequestBody(cusAcc, searchTerm, startDate, endDate, startIndex, endIndex, sortBy, sortOrder);
-        jsonPayload = util.retrievePayload(requestBody, 'invoices');
+        jsonPayload = util.retrievePayload(requestBody, 'adjustment_notes');
         
         parse(jsonPayload.replace('\\','\\\\')); 
             

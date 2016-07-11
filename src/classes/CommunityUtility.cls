@@ -33,7 +33,7 @@ global class CommunityUtility {
     public string retrievePayload(string requestBody
                                   , string documentType){
                                       
-                                      string endpoint='https://portal.penguinrandomhouse.com.au/' + documentType + '/getDocumentList?p=' + requestBody;
+                                      string endpoint='https://portaldev.penguinrandomhouse.com.au/' + documentType + '/getDocumentList?p=' + requestBody;
                                       
                                       HTTPrequest req = new HTTPrequest();
                                       req.setEndpoint(endpoint);

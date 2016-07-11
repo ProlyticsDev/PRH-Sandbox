@@ -1,8 +1,7 @@
 public with sharing class StatementRetrievalController {
     
     public StatementRetrievalController(){
-        showResultsTable = true;
-        parse(jsonPayload.replace('\\','\\\\'));
+        doSearch();
     }
 
     private final string jsonPayload = retrievePayload();
