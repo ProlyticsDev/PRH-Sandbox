@@ -1,0 +1,516 @@
+{
+    "properties": [
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "jsonPayload", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 19, 
+                "line": 9
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "hasNext", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 20, 
+                "line": 22
+            }, 
+            "type": "Boolean"
+        }, 
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "hasPrevious", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 20, 
+                "line": 31
+            }, 
+            "type": "Boolean"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public", 
+                "final"
+            ], 
+            "name": "util", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 42, 
+                "line": 7
+            }, 
+            "type": "CommunityUtility"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public"
+            ], 
+            "name": "ROW_COUNT", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 27, 
+                "line": 11
+            }, 
+            "type": "Integer"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public", 
+                "final"
+            ], 
+            "name": "cusAcc", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 32, 
+                "line": 13
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public"
+            ], 
+            "name": "SearchTerm", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 26, 
+                "line": 14
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public"
+            ], 
+            "name": "startDate", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 26, 
+                "line": 15
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public"
+            ], 
+            "name": "endDate", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 26, 
+                "line": 16
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public"
+            ], 
+            "name": "startIndex", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 26, 
+                "line": 17
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public"
+            ], 
+            "name": "endIndex", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 26, 
+                "line": 18
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public"
+            ], 
+            "name": "sortBy", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 26, 
+                "line": 19
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public"
+            ], 
+            "name": "sortOrder", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 26, 
+                "line": 20
+            }, 
+            "type": "String"
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public"
+            ], 
+            "name": "adjustment_note", 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 41, 
+                "line": 85
+            }, 
+            "type": "LIST"
+        }
+    ], 
+    "externalReferences": [], 
+    "innerClasses": [
+        {
+            "properties": [
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "ACCOUNT_NUMBER", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 23, 
+                        "line": 56
+                    }, 
+                    "type": "String"
+                }, 
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "BILLING_NUMBER", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 23, 
+                        "line": 57
+                    }, 
+                    "type": "String"
+                }, 
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "DOCUMENT_NUMBER", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 23, 
+                        "line": 58
+                    }, 
+                    "type": "String"
+                }, 
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "DOCUMENT_DATE", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 23, 
+                        "line": 59
+                    }, 
+                    "type": "String"
+                }, 
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "DOCUMENT_TYPE", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 23, 
+                        "line": 60
+                    }, 
+                    "type": "String"
+                }, 
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "PERIOD_YYYYMM", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 23, 
+                        "line": 61
+                    }, 
+                    "type": "String"
+                }, 
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "CUSTOMER_REFERENCE", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 23, 
+                        "line": 62
+                    }, 
+                    "type": "String"
+                }, 
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "TOTAL_INVOICE_AMOUNT", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 23, 
+                        "line": 63
+                    }, 
+                    "type": "String"
+                }, 
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "DOCUMENT_FILENAME", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 23, 
+                        "line": 64
+                    }, 
+                    "type": "String"
+                }, 
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "documentDateFormatted", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 21, 
+                        "line": 65
+                    }, 
+                    "type": "Date"
+                }, 
+                {
+                    "modifiers": [
+                        "public"
+                    ], 
+                    "name": "encryptedUrl", 
+                    "visibility": "PUBLIC", 
+                    "references": [], 
+                    "location": {
+                        "column": 23, 
+                        "line": 70
+                    }, 
+                    "type": "String"
+                }
+            ], 
+            "externalReferences": [], 
+            "innerClasses": [], 
+            "interfaces": [], 
+            "constructors": [], 
+            "namespace": null, 
+            "name": "ADJUSTMENT_NOTE", 
+            "tableDeclaration": {
+                "type": "ADJUSTMENT_NOTE", 
+                "modifiers": [
+                    "public"
+                ], 
+                "references": [], 
+                "location": {
+                    "column": 18, 
+                    "line": 54
+                }, 
+                "name": "ADJUSTMENT_NOTE"
+            }, 
+            "key": null, 
+            "variables": [
+                {
+                    "type": "Integer", 
+                    "modifiers": [], 
+                    "references": [], 
+                    "location": {
+                        "column": 25, 
+                        "line": 72
+                    }, 
+                    "name": "ts"
+                }, 
+                {
+                    "type": "String", 
+                    "modifiers": [], 
+                    "references": [], 
+                    "location": {
+                        "column": 24, 
+                        "line": 74
+                    }, 
+                    "name": "clearText"
+                }
+            ], 
+            "id": null, 
+            "methods": []
+        }
+    ], 
+    "interfaces": [], 
+    "constructors": [
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "AdjustmentNoteRetrievalController", 
+            "parameters": [], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 12, 
+                "line": 3
+            }, 
+            "type": null
+        }
+    ], 
+    "namespace": null, 
+    "name": "AdjustmentNoteRetrievalController", 
+    "tableDeclaration": {
+        "type": "AdjustmentNoteRetrievalController", 
+        "modifiers": [
+            "public", 
+            "with sharing"
+        ], 
+        "references": [], 
+        "location": {
+            "column": 27, 
+            "line": 1
+        }, 
+        "name": "AdjustmentNoteRetrievalController"
+    }, 
+    "key": "01pN0000000I3VnIAK", 
+    "variables": [
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 16, 
+                "line": 90
+            }, 
+            "name": "requestBody"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 66, 
+                "line": 97
+            }, 
+            "name": "payload"
+        }
+    ], 
+    "id": "01pN0000000I3VnIAK", 
+    "methods": [
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "getNext", 
+            "parameters": [], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 17, 
+                "line": 40
+            }, 
+            "returnType": "void", 
+            "type": null
+        }, 
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "getPrevious", 
+            "parameters": [], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 17, 
+                "line": 47
+            }, 
+            "returnType": "void", 
+            "type": null
+        }, 
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "DoSearch", 
+            "parameters": [], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 17, 
+                "line": 88
+            }, 
+            "returnType": "void", 
+            "type": null
+        }, 
+        {
+            "modifiers": [
+                "static", 
+                "public"
+            ], 
+            "name": "parse", 
+            "parameters": [
+                {
+                    "type": "String", 
+                    "name": "payload"
+                }
+            ], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 53, 
+                "line": 97
+            }, 
+            "returnType": "AdjustmentNoteRetrievalController", 
+            "type": null
+        }
+    ]
+}
