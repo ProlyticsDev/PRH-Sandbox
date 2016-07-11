@@ -1,0 +1,18 @@
+<apex:component controller="CommunitySearchController" id="theComponent" >
+    
+    <apex:attribute name="uid" type="string" required="true" assignto="{!UserId}" description="Assign User ID for Search feature" />
+    
+    <apex:form >
+        UserId: {!UserId}<br/>        
+        <apex:inputText value="{!SearchTerm}" /><br/>
+        <apex:commandButton action="{!doSearch}" value="Search" reRender="invoiceTable" />
+        
+        <apex:actionRegion immediate="true">
+            <apex:dataTable value="{!invoiceResults}" var="inv" id="invoiceTable">
+                <apex:column value="{!inv.Name}" headerValue="Invoice Name" /> 
+            </apex:dataTable>
+        </apex:actionRegion>
+            
+    </apex:form>
+    
+</apex:component>

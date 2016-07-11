@@ -1,0 +1,89 @@
+<apex:page showHeader="false" id="thePage" controller="CommunitySearchController" standardStylesheets="false">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <style>
+    	a{
+        color: #ff8135 !important;
+        }
+        span #thePage:searchForm:searchStatus.start{
+        color: #ff8135 !important;
+        }
+    </style>
+    
+    <apex:form styleClass="form-inline" id="searchForm">
+        
+        <apex:inputText value="{!SearchTerm}" styleClass="form-control" style="width: 300px;" />&nbsp;
+        <apex:commandLink styleclass="btn btn-default" action="{!doSearch}" value="Search" reRender="invoiceTable, statementTable" status="searchStatus" />&nbsp;&nbsp;
+        <apex:actionStatus id="searchStatus" startText="Searching..." stopText="" styleClass="color: #ff8135 !important;" startStyleClass="color: #ff8135 !important;" />
+        
+    </apex:form>
+    
+    <apex:form >
+               
+        <apex:actionRegion >
+            <apex:outputPanel id="invoiceTable">
+                <apex:outputPanel rendered="{!noneFoundMessage}">
+                    <br/>
+                    <br/>
+                    <h3>
+                        No results found
+                    </h3>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!if(lstInvoice != null && lstInvoice.size > 0, true,false )}">
+                    <br/>
+                    <br/>
+                    <h4>
+                        Total Invoices Found: {!invoiceCon.resultSize}
+                    </h4>
+                    <apex:pageblock >
+                    <apex:pageblockTable value="{!lstInvoice}" var="inv" styleClass="table table-striped">
+                        <apex:column headerValue="Invoice Name">
+                            <apex:outputField value="{!inv.Action__c}" styleClass="color: #ff8135 !important;" />
+                        </apex:column>
+                        <apex:column headerValue="Customer Reference">
+                            <apex:outputField value="{!inv.Customer_Ref__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Invoice Date">
+                            <apex:outputField value="{!inv.Invoice_Date__c}" />
+                        </apex:column>
+                    </apex:pageblockTable>
+                    <apex:pageBlockButtons location="bottom" styleClass="float: right;">
+                        <apex:commandLink style="float: left;" action="{!invoicePrevious}" title="Previous Page" value="Previous Page" rendered="{!invoiceHasPrevious}"/>
+                        <apex:outputText rendered="{!invoiceHasPrevious && invoiceHasNext}" value="&nbsp;|&nbsp;" escape="false" />
+                        <apex:commandLink style="float: right;" action="{!invoiceNext}" title="Next Page" value="Next Page" rendered="{!invoiceHasNext}"/>
+                    </apex:pageBlockButtons>
+                    </apex:pageblock>
+                </apex:outputPanel> 
+            </apex:outputPanel>
+            
+            <apex:outputPanel id="statementTable">
+                <apex:outputPanel rendered="{!if(lstStatement != null && lstStatement.size > 0, true,false )}">
+                    <br/>
+                    <br/>
+
+                    <h4>
+                        Total Statements Found: {!statementCon.resultSize}
+                    </h4>
+                    <apex:pageblock >
+                    <apex:pageblockTable value="{!lstStatement}" var="state" styleClass="table table-striped">
+                        <apex:column headerValue="Statement Name">
+                            <apex:outputField value="{!state.Action__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Statement Date">
+                            <apex:outputField value="{!state.Statement_Date__c}" />
+                        </apex:column>
+                    </apex:pageblockTable>
+                    <apex:pageBlockButtons location="bottom" styleClass="float: right;">
+                        <apex:commandLink style="float: left;" action="{!statementPrevious}" title="Previous Page" value="Previous Page" rendered="{!statementHasPrevious}"/>
+                        <apex:outputText rendered="{!statementHasPrevious && statementHasNext}" value="&nbsp;|&nbsp;" escape="false" />
+                        <apex:commandLink style="float: right;" action="{!statementNext}" title="Next Page" value="Next Page" rendered="{!statementHasNext}"/>
+                    </apex:pageBlockButtons>
+                    </apex:pageblock>
+                </apex:outputPanel> 
+            </apex:outputPanel>
+            
+        </apex:actionRegion>
+        
+    </apex:form>
+    
+</apex:page>

@@ -1,0 +1,2 @@
+<apex:page standardController="Adjustment_Note__c" extensions="AdjustmentNoteURLEncryptionController" action="{!HashRedirect}" > 
+</apex:page>

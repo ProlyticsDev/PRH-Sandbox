@@ -1,0 +1,308 @@
+<apex:component controller="TreeViewController">
+    <apex:attribute name="onixId" required="false" type="String" assignTo="{!onixId}" description="Enter Onix Subject Id to build the hierarchy. Pass null if you are passing JSON data as a parameter" />
+    <apex:attribute name="selectable" type="Boolean" assignTo="{!selectable}" description="Do you want nodes to be selectable?" />
+    <apex:attribute name="value" type="String" description="IDs of selected Nodes in CSV format" />
+    <apex:attribute name="JsonData" type="String" assignTo="{!JsonData}" description="JSON input for the tree component" />
+    <apex:inputHidden id="selectedKeys" value="{!value}" />
+    <apex:includeScript value="{!URLFOR($Resource.DynaTree, 'jquery/jquery.js' )}" />
+    <apex:includeScript value="{!URLFOR($Resource.DynaTree, 'jquery/jquery-ui.custom.js' )}" />
+    <apex:includeScript value="{!URLFOR($Resource.DynaTree, 'jquery/jquery.cookie.js' )}" />
+    <apex:includeScript value="{!URLFOR($Resource.DynaTree, 'src/jquery.dynatree.js' )}" />
+     
+    
+    <apex:stylesheet value="{!URLFOR($Resource.DynaTree, 'src/skin/ui.dynatree.css')}" />
+    <style type="text/css">
+        ul.dynatree-container span.td {
+           /*display: table-cell;*/
+           position: absolute;
+           display: inline;
+           border-size: 1px;
+           overflow: hidden;
+        }
+        /*ul.dynatree-container span.td:nth-child(1) {
+           position: static;
+        } 
+        ul.dynatree-container span.td:nth-child(2) {
+           left: 500px;
+           width: 50px;
+        }*/
+        
+        a {
+            color:blue;
+        }
+        </style>
+    
+    
+    <script type="text/javascript">
+    
+    //Global node dictionary
+    var mySelectedNodes = new Array();
+    //Global preference dictionary
+    var myChoiceNodes = new Array();
+    //Global selected keys
+    var selKeys = new Array();
+    
+    //Search Ajax call function
+    function search() {
+        //$("#status").html("Searching...");
+ 
+        // Make the Ajax Request
+        $.getJSON("{!$Page.AjaxResponder}", {
+            "core.apexpages.devmode.url" :'1',
+            "q" :$('#query').val()
+        }, function(data) {
+            $("#tree").dynatree("getRoot").removeChildren();
+            $("#tree").dynatree("getRoot").addChild(data);
+            //check node if already added before
+            //$("#tree").dynatree("getRoot").visit(function(node){
+            //  if(checkExists(node) != -1 && !node.hasChildren())
+            //      node.select(true);
+            //});
+        });
+        //$("#status").html("Done!");
+    }
+    
+    //Dynatree init
+    $(function(){
+        // Attach the dynatree widget to an existing <div id="tree"> element
+        // and pass the tree options as an argument to the dynatree() function:
+        // This will happen each time a check box is selected/deselected
+                
+        $("#tree").dynatree({
+            onActivate: function(node) {
+                // A DynaTreeNode object is passed to the activation handler
+                // Note: we also get this event, if persistence is on, and the page is reloaded.
+                //alert("You activated " + node.data.key);
+            },
+            persist: false,
+            checkbox: {!selectable},
+            generateIds: true,
+            classNames: {
+                checkbox: "dynatree-checkbox",
+                expanded: "dynatree-expanded"
+            },
+            selectMode: 3,
+            
+            onCustomRender: function(node) {
+                // Render title as columns
+                //if(node.data.title.indexOf("~") === -1){
+                    // Default rendering
+                //    return false;
+                //}
+                var cols = node.data.title.split("~");
+                //html = "<a class='dynatree-title' href='#'>";
+                html = "";
+                for(var i=0; i<cols.length; i++){
+                    if(i==1)
+                        html += "<span class='td' style='left: 500px;'>" + cols[i] + "</span>";
+                    else
+                        html += "<span class='td'>" + cols[i] + "</span>";
+                }
+                return html;// + "</a>";
+            },
+            //onRender: function(node, nodeSpan) {
+                //$(nodeSpan).find("a.dynatree-title").css("color", "red");
+            //},
+            initAjax: {url: "{!$Page.AjaxResponder}",
+               data: {"core.apexpages.devmode.url": "1", // Optional arguments to append to the url
+                      q: "poiuytrewq"
+                      }
+               },
+            //children: {!JsonString},
+            debugLevel: 0,
+            onLazyRead: function(node){
+                node.appendAjax({url: "{!$Page.AjaxResponder}",
+                    data: {"core.apexpages.devmode.url": "1", // Optional arguments to append to the url
+                      q: "qwertyuiop",
+                      id: node.data.key
+                      }
+                          });
+            },
+            onSelect: function(select, node) {
+                //if checked
+                if(select){
+                    //alert(node);
+                    if(checkExists(node) == -1){
+                        mySelectedNodes.push(node);
+                    }
+                    if(node.hasChildren()){
+                        node.visit(function(n){
+                            //alert(n);
+                            if(checkExists(n) == -1)
+                                mySelectedNodes.push(n);
+                        });
+                    }
+                    if(node.getLevel() >1){
+                        node.visitParents(function(n){
+                            if(checkExists(n) == -1 && n.getLevel() >1){
+                                //alert(n);
+                                mySelectedNodes.push(n);
+                            }
+                        }); 
+                    }
+                    //alert(mySelectedNodes.length);
+                }else{
+                    //alert(node);
+                    if($.inArray(node, mySelectedNodes) != -1){
+                        mySelectedNodes.splice($.inArray(node,mySelectedNodes) ,1 );
+                    }
+                    if(node.hasChildren()){
+                        node.visit(function(n){
+                            //alert(n);
+                            if($.inArray(n, mySelectedNodes) != -1)
+                                mySelectedNodes.splice($.inArray(n,mySelectedNodes) ,1 );
+                        });
+                    }
+                    if(node.getLevel() >1){
+                        var skip=false;
+                        if(node.getPrevSibling() != null && $.inArray(node.getPrevSibling(), mySelectedNodes) != -1
+                            || node.getNextSibling() != null && $.inArray(node.getNextSibling(), mySelectedNodes) != -1)
+                            skip=true;
+                        //if other siblings are checked, skip deleting parents  
+                        if(!skip){
+                            node.visitParents(function(n){
+                                if($.inArray(n, mySelectedNodes) != -1 && n.getLevel() >1){
+                                    //alert(n);
+                                    mySelectedNodes.splice($.inArray(n,mySelectedNodes) ,1 );
+                                    skip = false;
+                                    if(n.getPrevSibling() != null && $.inArray(n.getPrevSibling(), mySelectedNodes) != -1
+                                        || n.getNextSibling() != null && $.inArray(n.getNextSibling(), mySelectedNodes) != -1)
+                                        skip=true;
+                                    if(skip)
+                                        return false;
+                                    
+                                }
+                            });
+                        } 
+                    }
+                    //alert(mySelectedNodes.length);
+                }
+                rebuildList();
+                
+                $('#deselectAll').click(function(){
+                    $("#tree").dynatree("getRoot").visit(function(node){
+                        node.select(false);
+                    });
+                    $('#selectedOS').html('');
+                    $('#selectedTot').html('Selected/ticked interests (<b>'+0+'</b> selected)');
+                    mySelectedNodes = new Array();
+                    rebuildList();
+                    return false;
+                });
+            }
+        });
+    });
+    
+    function checkExists(node){
+        var doesExist=-1;
+        jQuery.each(mySelectedNodes, function() {
+            //alert('node: |'+node.data.key+'| this: |'+this.data.key+'|');
+            if(this.data.key === node.data.key)
+            {
+                //alert('return');
+                doesExist=1;
+            }
+        });
+        return doesExist;
+    }
+    
+    function rebuildList(){
+        selKeys = new Array();
+        var selectedKeys = $.map(mySelectedNodes, function(node) {
+            selKeys.push(node.data.key);
+            var cols = node.data.title.split("~");
+            var html = "<tr><td><a id=\""+node.data.key+"\" href=\"#\" onclick=\"delHandler(this);\" style=\"color: blue;\">Del</a> |</td>";
+            for(var i=0; i<cols.length; i++){
+                html += "<td>" + cols[i] + "</td>";
+            }
+            //add select box with interested selected as default
+            html += "<td><select name=\""+node.data.key+"\" onchange=\"choiceHandler(this);\"><option value=\"Neutral\">Neutral</option><option value=\"Interested\" selected=true>Interested</option><option value=\"Not Interested\">Not Interested</option></select></td>";
+            html +="</tr>";
+            //check if a choice was made previously for this subject
+            if(myChoiceNodes[node.data.key] == null)
+                myChoiceNodes[node.data.key]="Interested";
+            return html;
+        });
+        $('#selectedTot').html('Selected/ticked interests (<b>'+selectedKeys.length+'</b> selected)');
+        $('#selectedOS').html("<table>"+selectedKeys.join("")+"</table>");
+        //set choices made previously for this subject
+        setChoice();
+        returnString();
+        //jQuery(document.getElementById("{!$Component.selectedKeys}")).val(selKeys.join(","));     
+    }
+    //store choice made (interested/mot interested/neutral) for each subject onChange
+    function choiceHandler(key){
+        var id = $(key).attr("name");
+        //alert( myChoiceNodes[id]);
+        if(myChoiceNodes[id] == null)
+            myChoiceNodes[id] = $(key).find("option:selected").attr('value');
+        else if(myChoiceNodes[id] != $(key).find("option:selected").attr('value'))
+            myChoiceNodes[id] = $(key).find("option:selected").attr('value');
+        //alert( myChoiceNodes[id]);
+        returnString();
+    }
+    //function to set previously selected choice for each subject
+    function setChoice(){
+        for(var key in myChoiceNodes) {
+            $('select[name='+key+']').val(myChoiceNodes[key]);
+        }
+    }
+    //create the id:choice string to send back to VF page
+    function returnString(){
+        //create the id:choice string to send back to VF page
+        var backString="";
+        for(var i=0; i<selKeys.length;i++){
+            if(i!=0)
+                backString += ",";
+            backString += selKeys[i]+":"+ myChoiceNodes[selKeys[i]];
+        }
+        jQuery(document.getElementById("{!$Component.selectedKeys}")).val(backString);
+    }
+    //function to handle delete for subjet nodes selected from the tree
+    function delHandler(key){
+        jQuery.each(mySelectedNodes, function() {
+            if(this.data != null && this.data.key === $(key).attr("id"))
+            {
+                $('#selectedOS').html('');
+                mySelectedNodes.splice($.inArray(this,mySelectedNodes) ,1 );
+                rebuildList();
+            }
+        });
+        //toggle tree, throws exception when node is no longer on the tree
+        try{
+            $("#dynatree-id-"+$(key).attr("id")).prop("dtnode").toggleSelect();
+        }catch(err){
+        }
+    }
+    
+     
+    </script>
+    <table>
+        <tr>
+            <td>
+                <input type="text" id="query" />
+                <input type="button" class="btn" onclick="search();" value="Search Onix Subjects" />
+                <!-- <pre id="status" style="font-size: 10px" />  -->
+            </td>           
+        </tr>
+    </table>
+    
+    <table>
+        <tr>
+            <td><div id="tree" style="width: 600px; max-height: 300px; overflow: scroll;position:relative; overflow-x: auto;"> </div></td>
+            <td>
+                <table>
+                    <tr>
+                        <td><div id="selectedTot" >Selected/ticked interests (<b>0</b> selected)</div></td>
+                        <td><div ><a href="#" id="deselectAll" style="color: blue;">Deselect All</a></div></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><div id="selectedOS" style="max-height: 278px; overflow: scroll; overflow-x: auto;"> </div></td>
+                        
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</apex:component>

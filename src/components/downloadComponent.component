@@ -1,0 +1,115 @@
+<apex:component >
+    
+    <head>
+        <title></title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="/resource/1461203333000/bootstrap/bootstrap-3.3.6-dist/css/bootstrap.css" />
+    </head>
+    <body>
+        <div class="wrap">
+            <div class="jumbotron">
+                <div class="container">
+                    <img src="prh-anz-logo.png"/>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div id="sidebar" class="col-md-2">
+                        <ul>
+                            <li>
+                                <a href="https://www.penguin.com.au/search">Catalogue Search</a>
+                            </li>
+                            <li>
+                                <a href="download.html">Download</a>
+                            </li>
+                            <li>
+                                <a href="services-and-information.html">Services &amp; Information</a>
+                            </li>
+                            <li>
+                                <a href="contact-us.html">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="page" class="col-md-10">
+                        <h2>Bookseller Services</h2>
+                        <h3>Download</h3>
+                        <p>Downloadable information, for use on bookseller websites, is available here for most new releases and forthcoming titles distributed by Penguin Books Australia.</p>
+                        <ul>
+                            <li><a href="#new_releases">New Releases</a> - these zip files contain the titles information and covers for a particular month. These files are updated monthly. </li>
+                            <li><a href="#availability">Price and Availability</a> - contains price and stock availability for Penguin's entire catalogue. This file is updated daily.</li>
+                            <li><a href="#catalogue">Catalogue</a> - Penguin Random House's entire catalogue, in txt and xml formats, which can be easily incorporated into database or spreadsheet packages.</li>
+                        </ul>
+                        <h4>New Releases</h4>
+                        <table id="new_releases" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>File</th>
+                                    <th>File Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="loading">Loading files...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Titles information comprises CSV (comma separated variable) text files which can be easily imported to Excel and other spreadsheet programs, and/or inserted into a web database. The information is ordered alphabetically by title in each. Data for each book, if available, is as follows:</p>
+                        <p class="text-muted">SBN, Title, Author, Illustrator, RRP, Publication Date, Imprint, Publisher, Media (e.g. paperback), Page Extent, Format (e.g. A, B, etc), Size (i.e. dimensions), Book type (e.g. fiction/non-fiction), Audience, Country Of Origin, Book Description, Orderform Name, Availability Status, Cover Image Flag (Y if available), SBN10</p>
+                        <h4>Price &amp; Availability</h4>
+                        <p>Stock Availability, indicated by a 'Y' yes or 'N' no, is available for the entire catalogue. This text file is updated daily.</p>
+                        <p>A title is flagged 'N' (not available) if:</p>
+                        <ol>
+                            <li>it is Out of Print and stock is no longer available</li>
+                            <li>it is Not Yet Published</li>
+                        </ol>
+                        <table id="availability" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>File</th>
+                                    <th>File Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="loading">Loading files... </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h4>Catalogue</h4>
+                        <table id="catalogue" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>File</th>
+                                    <th>File Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="loading">Loading files... </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h5>ONIX.zip</h5>
+                        <p>This file contains XML information which can be easily imported to Excel and other spreadsheet programs, and/or inserted into a web database. All titles on the Penguin Books Australia website are included. Data for each book, if available, is as follows:</p>
+                        <p class="text-muted">ISBN, Title, Author, Illustrator, RRP, Publication Date, Imprint, Publisher, Media (e.g. paperback), Page Extent, Format (e.g. A, B, etc), Size (i.e. dimensions), Book Type (e.g. fiction/non-fiction), BIC Code</p>
+                        <h5>catalog.zip</h5>
+                        <p>This file contains CSV (comma separated variables) text information which can be easily imported to Excel (choose 'import' not 'open') and other spreadsheet programs, and/or inserted into a web database. All titles on the Penguin Books Australia website are included. Data for each book, if available, is as follows:</p>
+                        <p class="text-muted">ISBN, Title, Author, Illustrator, RRP, Publication Date, Imprint, Publisher, Media (e.g. paperback), Page Extent, Format (e.g. A, B, etc), Size (i.e. dimensions), Book Type (e.g. fiction/non-fiction), Audience, Country Of Origin, Book Description, Availability, Availability Status, Cover Image, Barcode No, SBN 10, Category, BIC Codes</p>
+                        <h5>categories.zip</h5>
+                        <p>This file contains CSV text information of categories assigned to Penguin titles. Data is as follows:</p>
+                        <p class="text-muted">ISBN, Category, SBN10 </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-1"><img src="logo.png" alt="Penguin Random House" border="none"/></div>
+                    <div class="col-md-11"><strong>Penguin Random House Australia</strong><br/><span>Penguin Random House Australia ACN 004 815 703</span></div>
+                </div>
+            </div>
+        </footer>
+    </body>
+    
+</apex:component>

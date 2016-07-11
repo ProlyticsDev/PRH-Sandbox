@@ -1,0 +1,57 @@
+<apex:page standardController="Title_Feedback__c" extensions="TitleFeedbackEditExCon">
+    <apex:sectionHeader title="{!$ObjectType.Title_Feedback__c.label} Edit" subtitle="{!IF(ISNULL(Title_Feedback__c.Name),'New '&$ObjectType.Title_Feedback__c.label,Title_Feedback__c.Name)}"/>
+    <apex:pagemessages />
+    <apex:outputPanel rendered="{!ISNULL(Title_Feedback__c.Id)&&ISNULL(titlePicklistValues)}"> 
+        <table cellspacing="10">
+          <tbody>
+              <tr>
+                  <td>
+                      <span style="font-weight: bold; font-size: 12pt;">There are no active title sets with titles</span>
+                  </td>
+              </tr>
+              <tr>
+                  <td>
+                      There is no active title sets that contains titles. Please go to&nbsp;<apex:outputLink value="{!URLFOR($Action.Title_Set__c.Tab, $ObjectType.Title_Set__c)}">Title Set</apex:outputLink> and activate an existing title set or create a new active title set with titles.      
+                  </td>
+              </tr>
+        </tbody></table>
+    </apex:outputPanel>    
+    <apex:form rendered="{!NOT(ISNULL(Title_Feedback__c.Id))||NOT(ISNULL(titlePicklistValues))}">
+        <apex:pageblock title="{!$ObjectType.Title_Feedback__c.label} Edit" mode="edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Save & New" action="{!saveAndNew}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:pageblockSection id="infoPBS" title="Information" columns="1">
+                <apex:outputField value="{!Title_Feedback__c.Title__c}" rendered="{!NOT(ISNULL(Title_Feedback__c.Id))}"/>
+                <apex:pageblockSectionItem rendered="{!ISNULL(Title_Feedback__c.Id)}">
+                    <apex:outputLabel value="{!$ObjectType.Title_Feedback__c.fields.Title__c.label}"/>
+                    <apex:outputPanel >
+                        <apex:actionstatus id="infoStatus">
+                            <apex:facet name="start">
+                                <apex:image value="{!$Resource.loading_icon}" alt="Loading..."/>
+                            </apex:facet>
+                            <apex:facet name="stop">
+                                <apex:actionRegion >
+                                <apex:selectList size="1" value="{!titlePicklistSelectedValue}">
+                                    <apex:selectOptions value="{!titlePicklistValues}"/>
+                                    <apex:actionSupport event="onchange" status="infoStatus" rerender="infoPBS"/>
+                                </apex:selectList>
+                                </apex:actionRegion>
+                            </apex:facet>
+                        </apex:actionstatus>
+                    </apex:outputPanel>
+                </apex:pageblockSectionItem>
+                <apex:pageblockSectionItem rendered="{!titlePicklistSelectedValue==TITLE_PICKLIST_OTHER_VALUE}">
+                    <apex:outputLabel />
+                    <apex:inputField value="{!Title_Feedback__c.Title__c}" style="width:400px" required="true" />
+                </apex:pageblockSectionItem>
+            </apex:pageblockSection>
+            <apex:pageblockSection columns="1">
+                <apex:inputField value="{!Title_Feedback__c.Related_Account__c}" style="width:400px"/>
+                <apex:inputfield value="{!Title_Feedback__c.Feedback_Comment__c}" style="width:400px" required="true"/>
+            </apex:pageblockSection>
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,19 @@
+{
+    "username": "prh@prolytics.com.au.dev", 
+    "environment": "sandbox", 
+    "project_name": "PRH-Sandbox", 
+    "workspace": "c:/repo/", 
+    "org_url": "", 
+    "namespace": "", 
+    "id": "S10FDNZVXIN8LPM4F6L0O3S34EAH2YRE", 
+    "metadata_container": "1dcN0000000ccKZIAY", 
+    "subscription": [
+        "ApexClass", 
+        "ApexComponent", 
+        "ApexPage", 
+        "ApexTrigger", 
+        "StaticResource", 
+        "CustomObject", 
+        "Profile"
+    ]
+}

@@ -1,0 +1,181 @@
+<apex:page controller="AdjustmentNoteRetrievalController" showHeader="false" docType="html-5.0" applyHtmlTag="false"
+           applyBodyTag="false" standardStylesheets="false">
+    
+    <html>
+        <head>
+            
+            <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" />
+            <apex:includeScript value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" />
+            <apex:includeScript value="{!URLFOR($Resource.datePicker)}"/>
+            
+            <apex:includeScript value="https://cdn.rawgit.com/mailtoharshit/ForceSpinner/master/src/js/forcespinner.js" />
+            
+            <apex:stylesheet value="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" />
+            <apex:stylesheet value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+            <apex:stylesheet value="{!URLFOR($Resource.datePickerStyle)}" />
+            <apex:stylesheet value="https://cdn.rawgit.com/mailtoharshit/ForceSpinner/master/src/css/forcespinner.css"/>
+            
+            <script>
+            $(document).ready(function(){
+                $('.datepicker').datepicker({
+                    format: 'dd/mm/yyyy',
+                    autoclose: true,
+                    todayHighlight: true
+                });
+            });
+            </script>
+            
+            <style>
+            	th > a {
+                	text-decoration: none;
+                	color: #333333;
+                }
+                
+            </style>
+            
+        </head>
+        
+        <body>
+            
+            <apex:form >
+                
+                <div class="well">
+                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="exampleInputEmail1">Search Term</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="exampleInputEmail1">Start Date</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="exampleInputEmail1">End Date</label>
+                        </div>
+                        <div class="col-md-5">
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <apex:inputText value="{!SearchTerm}" styleclass="form-control" id="searchTerm" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group date">
+                                <apex:input value="{!startDate}" type="text" styleclass="form-control datepicker" html-autocomplete="off" />
+                                <div class="input-group-addon">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group date">
+                                <apex:input value="{!endDate}" type="text" styleclass="form-control datepicker" html-autocomplete="off" />
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <apex:commandLink action="{!doSearch}" styleclass="btn btn-default" value="Search" reRender="statementTable" status="searchStatus" />
+                                <apex:actionStatus id="searchStatus" stopText="" styleClass="color: #ff8135 !important;" startStyleClass="color: #ff8135 !important;">
+                                    <apex:facet name="start">
+                                        <i class="fa fa-circle-o-notch fa-spin" /> Searching...
+                                    </apex:facet>
+                                </apex:actionStatus>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+
+                <apex:outputPanel id="statementTable">
+                    
+                        <h4>
+                            {!adjustment_note.size} Adjustment Notes Found
+                        </h4>
+                        <table class="table table-hover">
+                            
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <apex:commandLink action="{!reorderTable}" immediate="true" value="Adjustment Note Number" reRender="statementTable" status="searchStatus">
+                                            <apex:param name="sortBy" assignTo="{!sortBy}" value="DOCUMENT_NUMBER"/>
+                                            <apex:param name="sortOrder" assignTo="{!sortOrder}" value="{!IF(sortOrder = 'ASC', 'DESC', 'ASC')}" />
+                                            <apex:outputPanel rendered="{!IF(sortBy = 'DOCUMENT_NUMBER', true, false)}">
+                                                <i class="fa fa-sort-{!LOWER(sortOrder)}"></i>
+                                            </apex:outputPanel>
+                                        </apex:commandLink>
+                                    </th>
+                                    <th>
+                                        <apex:commandLink action="{!reorderTable}" value="Customer Reference" reRender="statementTable">
+                                            <apex:param name="sortBy" assignTo="{!sortBy}" value="CUSTOMER_REFERENCE"/>
+                                            <apex:param name="sortOrder" assignTo="{!sortOrder}" value="{!IF(sortOrder = 'ASC', 'DESC', 'ASC')}" />
+                                        	<apex:outputPanel rendered="{!IF(sortBy = 'CUSTOMER_REFERENCE', true, false)}">
+                                                <i class="fa fa-sort-{!LOWER(sortOrder)}"></i>
+                                            </apex:outputPanel>
+                                        </apex:commandLink>
+                                    </th>
+                                    <th>
+                                        <apex:commandLink action="{!reorderTable}" value="Adjustment Note Date" reRender="statementTable">
+                                            <apex:param name="sortBy" assignTo="{!sortBy}" value="DOCUMENT_DATE"/>
+                                            <apex:param name="sortOrder" assignTo="{!sortOrder}" value="{!IF(sortOrder = 'ASC', 'DESC', 'ASC')}" />
+                                        	<apex:outputPanel rendered="{!IF(sortBy = 'DOCUMENT_DATE', true, false)}">
+                                                <i class="fa fa-sort-{!LOWER(sortOrder)}"></i>
+                                            </apex:outputPanel>
+                                        </apex:commandLink>
+                                    </th>
+                                    <th>
+                                        <apex:commandLink value="Total Adjustment Amount" action="{!reorderTable}" reRender="statementTable">
+                                            <apex:param name="sortBy" assignTo="{!sortBy}" value="TOTAL_INVOICE_AMOUNT"/>
+                                            <apex:param name="sortOrder" assignTo="{!sortOrder}" value="{!IF(sortOrder = 'ASC', 'DESC', 'ASC')}" />
+                                        	<apex:outputPanel rendered="{!IF(sortBy = 'TOTAL_INVOICE_AMOUNT', true, false)}">
+                                                <i class="fa fa-sort-{!LOWER(sortOrder)}"></i>
+                                            </apex:outputPanel>
+                                        </apex:commandLink>
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!adjustment_note}" var="a" >
+                                    <tr>
+                                        <td>{!a.DOCUMENT_NUMBER}</td>
+                                        <td>{!a.CUSTOMER_REFERENCE}</td>
+                                        <td>
+                                            <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                                <apex:param value="{!a.DocumentDateFormatted}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td>
+                                            <apex:outputText value="{0,number,$###,##0.00}">
+                                                <apex:param value="{!VALUE(a.TOTAL_INVOICE_AMOUNT)}" />
+                                            </apex:outputText>
+                                        </td>
+                                        <td>
+                                        	<apex:commandLink value="Download PDF" />
+                                        </td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table>
+                    
+                    <apex:outputPanel rendered="{!!showResultsTable}">
+                        <h3>
+                            {!resultsMessage}
+                        </h3>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                
+            </apex:form>
+            
+        </body>
+        
+    </html>
+    
+</apex:page>

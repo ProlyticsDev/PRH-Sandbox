@@ -1,0 +1,69 @@
+<apex:page standardController="Account_Interest__c" extensions="AccountInterestController" tabStyle="Account">
+    <script type="text/javascript">
+ 
+$(document).ready(function ()
+ {
+       collapse();
+ });
+            
+ function collapse()
+ {
+       elements = $('.hideListButton');
+            
+        elements.each(function()
+         {
+                  twistSection(this);
+          });
+}
+</script>
+    <apex:pageMessages ></apex:pageMessages>
+    <apex:outputPanel id="detail" layout="block" style="overflow:auto;max-height:150px">
+        <!-- <apex:outputLabel value="{!Account_Interest__c.Account__c}"/>
+        <apex:outputLabel value="{!selectedAccount}"/> -->
+        <apex:form >
+        
+        <apex:pageBlock id="tblId">
+            <apex:pageBlockSection title="{!selectedAccountName} - Saved Interests">
+            <!-- <apex:inputField value="{!Account_Interest__c.Account__c}" id="accField">
+                <apex:actionSupport event="onchange"  action="{!getSelectedAccount}" rerender="detail" status="status">
+                    <apex:param name="accountId" value="{!Account_Interest__c.Account__c}" assignTo="{!selectedAccount}"/>
+                </apex:actionSupport>
+                <apex:actionStatus startText="applying value..." id="status"/>
+            </apex:inputField> -->
+            <apex:dataTable value="{!Interests}" var="ints" cellPadding="4" border="0" >
+            <apex:column >
+                <apex:facet name="header"></apex:facet>
+                <apex:commandLink value="Del" action="{!del}" rerender="detail" style="color: blue;">
+                    <apex:param name="delname" value="{!ints.Id}" />
+                </apex:commandLink>
+                </apex:column>
+            <apex:column >
+                <apex:facet name="header">Onix Subject</apex:facet>
+                <apex:outputField value="{!ints.Interest_Category__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Code</apex:facet>
+                <apex:outputField value="{!ints.Interest_Category__r.Code__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Preference</apex:facet>
+                <apex:outputField value="{!ints.Interested_or_Avoid__c}"/>
+            </apex:column>
+          </apex:dataTable>
+          </apex:pageBlockSection>
+        </apex:pageBlock>
+        </apex:form>
+    </apex:outputPanel>
+    <br/>
+    <apex:pageBlock >       
+        <apex:form >
+            <c:TreeView selectable="true"  value="{!selectedValues}" />
+            <br/>
+            <apex:commandButton value="Save and Continue" action="{!save}"/>
+            <apex:commandButton value="Save and Return to Account" action="{!saveReturn}"/>
+            <apex:commandButton value="Cancel" action="{!cancel}"/>
+        </apex:form>
+    </apex:pageBlock>
+    
+    
+</apex:page>

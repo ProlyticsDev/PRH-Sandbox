@@ -1,0 +1,42 @@
+<apex:page standardstylesheets="false" id="communitiesSelfRegPage" showHeader="false" controller="CommunitiesSelfRegController" title="{!$Label.site.user_registration}">
+     <apex:define name="body">  
+     
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <style>
+        a{
+        color: #ff8135 !important;
+        }
+        span #thePage:searchForm:searchStatus.start{
+        color: #ff8135 !important;
+        }
+        label{float: left;}
+        .btn{ float: right; background-color: #FFFFFF; color: #ff8135; border-color: #ff8135; }
+        .btn:hover { background-color: #ff8135; color: #FFFFFF;  border-color: #ff8135;}
+    </style>
+     
+      <center>
+        <apex:form id="theForm" forceSSL="true" styleclass="form-horizonal" style="width: 300px;">
+            <apex:pageMessages id="error"/>
+            
+               <div class="form-group">
+                    <apex:outputLabel styleclass="control-label" value="First Name" for="firstName"/>
+                    <apex:inputText styleClass="form-control" required="true" id="firstName" value="{!firstName}" label="First Name"/>
+               </div>
+               <div class="form-group">
+                    <apex:outputLabel styleclass="control-label" value="Last Name" for="lastName"/>
+                    <apex:inputText styleclass="form-control" required="true" id="lastName" value="{!lastName}" label="Last Name"/>
+               </div>
+               <div class="form-group">
+                    <apex:outputLabel styleclass="control-label" value="Email" for="lastName"/>
+                    <apex:inputText styleclass="form-control" required="true" id="email" value="{!email}" label="Email"/>
+               </div>
+
+              <apex:commandButton styleclass="btn btn-info" action="{!registerUser}" value="Create User" id="submit"/>
+              
+          <br/>
+        </apex:form>
+     </center>
+      <br/>
+    </apex:define>
+
+</apex:page>

@@ -1,0 +1,2 @@
+<apex:page standardController="Statement__c" extensions="StatementURLEncryptionController" action="{!HashRedirect}" > 
+</apex:page>

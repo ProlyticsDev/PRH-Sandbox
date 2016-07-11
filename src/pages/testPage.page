@@ -1,0 +1,50 @@
+<apex:page controller="AdjustmentNoteRetrievalController" sidebar="false" 
+           standardStylesheets="false" showHeader="false" docType="html-5.0" applyHtmlTag="false" applyBodyTag="false">
+    
+    <html>
+        <head>
+            
+            <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" />
+            <apex:includeScript value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" />
+            <apex:includeScript value="{!URLFOR($Resource.datePicker)}"/>
+            
+            <apex:includeScript value="https://cdn.rawgit.com/mailtoharshit/ForceSpinner/master/src/js/forcespinner.js" />
+            
+            <apex:stylesheet value="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" />
+            <apex:stylesheet value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+            <apex:stylesheet value="{!URLFOR($Resource.datePickerStyle)}" />
+            <apex:stylesheet value="https://cdn.rawgit.com/mailtoharshit/ForceSpinner/master/src/css/forcespinner.css"/>
+
+            <script>
+            $(document).ready(function(){
+                $('.datepicker').datepicker({
+                    format: 'dd/mm/yyyy',
+                    autoclose: true,
+                    todayHighlight: true
+                });
+            });
+            </script>
+            
+        </head>
+        
+        <body>
+            
+            <apex:form >
+    
+                <apex:commandLink value="click" action="{!reorderTable}">
+                    <apex:param name="sortBy" assignTo="{!sortBy}" value="RANDOMVALUE" />
+                    <apex:param name="sortOrder" assignTo="{!sortOrder}" value="RANDOMVALUE" />
+                </apex:commandLink>
+                <br/> 
+                <apex:commandLink value="click2" action="{!reorderTable}">
+                    <apex:param name="sortBy" assignTo="{!sortBy}" value="RANDOMVALUE" />
+                    <apex:param name="sortOrder" assignTo="{!sortOrder}" value="RANDOMVALUE" />
+                </apex:commandLink>
+                    
+                </apex:form>
+            
+        </body>
+        
+    </html>
+    
+</apex:page>
