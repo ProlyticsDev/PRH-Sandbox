@@ -1,0 +1,394 @@
+{
+    "properties": [], 
+    "externalReferences": [], 
+    "innerClasses": [], 
+    "interfaces": [], 
+    "constructors": [], 
+    "namespace": null, 
+    "name": "CommunityUtility", 
+    "tableDeclaration": {
+        "type": "CommunityUtility", 
+        "modifiers": [
+            "global"
+        ], 
+        "references": [], 
+        "location": {
+            "column": 14, 
+            "line": 1
+        }, 
+        "name": "CommunityUtility"
+    }, 
+    "key": "01pN0000000I53gIAC", 
+    "variables": [
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 42, 
+                "line": 3
+            }, 
+            "name": "clearText"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 16, 
+                "line": 7
+            }, 
+            "name": "algo"
+        }, 
+        {
+            "type": "Blob", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 14, 
+                "line": 8
+            }, 
+            "name": "key"
+        }, 
+        {
+            "type": "Blob", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 14, 
+                "line": 9
+            }, 
+            "name": "iv"
+        }, 
+        {
+            "type": "Blob", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 14, 
+                "line": 10
+            }, 
+            "name": "hashstring"
+        }, 
+        {
+            "type": "Blob", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 14, 
+                "line": 12
+            }, 
+            "name": "encrypted"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 16, 
+                "line": 15
+            }, 
+            "name": "finalString"
+        }, 
+        {
+            "type": "Long", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 14, 
+                "line": 27
+            }, 
+            "name": "milliNow"
+        }, 
+        {
+            "type": "Long", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 14, 
+                "line": 28
+            }, 
+            "name": "milliEpoch"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 42, 
+                "line": 33
+            }, 
+            "name": "requestBody"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 44, 
+                "line": 34
+            }, 
+            "name": "documentType"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 46, 
+                "line": 36
+            }, 
+            "name": "endpoint"
+        }, 
+        {
+            "type": "HttpRequest", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 51, 
+                "line": 38
+            }, 
+            "name": "req"
+        }, 
+        {
+            "type": "Http", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 44, 
+                "line": 43
+            }, 
+            "name": "http"
+        }, 
+        {
+            "type": "HttpResponse", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 52, 
+                "line": 44
+            }, 
+            "name": "response"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 41, 
+                "line": 53
+            }, 
+            "name": "cusAcc"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 56, 
+                "line": 53
+            }, 
+            "name": "searchTerm"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 75, 
+                "line": 53
+            }, 
+            "name": "startDate"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 93, 
+                "line": 53
+            }, 
+            "name": "endDate"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 41, 
+                "line": 54
+            }, 
+            "name": "startIndex"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 60, 
+                "line": 54
+            }, 
+            "name": "endIndex"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 77, 
+                "line": 54
+            }, 
+            "name": "sortBy"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 92, 
+                "line": 54
+            }, 
+            "name": "sortOrder"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 45, 
+                "line": 56
+            }, 
+            "name": "requestBody"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 49, 
+                "line": 63
+            }, 
+            "name": "s"
+        }, 
+        {
+            "type": "String", 
+            "modifiers": [], 
+            "references": [], 
+            "location": {
+                "column": 49, 
+                "line": 68
+            }, 
+            "name": "e"
+        }
+    ], 
+    "id": "01pN0000000I53gIAC", 
+    "methods": [
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "stringEncrypter", 
+            "parameters": [
+                {
+                    "type": "String", 
+                    "name": "clearText"
+                }
+            ], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 19, 
+                "line": 3
+            }, 
+            "returnType": "String", 
+            "type": null
+        }, 
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "getEpochTime", 
+            "parameters": [], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 20, 
+                "line": 25
+            }, 
+            "returnType": "Integer", 
+            "type": null
+        }, 
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "retrievePayload", 
+            "parameters": [
+                {
+                    "type": "String", 
+                    "name": "requestBody"
+                }, 
+                {
+                    "type": "String", 
+                    "name": "documentType"
+                }
+            ], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 19, 
+                "line": 33
+            }, 
+            "returnType": "String", 
+            "type": null
+        }, 
+        {
+            "modifiers": [
+                "public"
+            ], 
+            "name": "getRequestBody", 
+            "parameters": [
+                {
+                    "type": "String", 
+                    "name": "cusAcc"
+                }, 
+                {
+                    "type": "String", 
+                    "name": "searchTerm"
+                }, 
+                {
+                    "type": "String", 
+                    "name": "startDate"
+                }, 
+                {
+                    "type": "String", 
+                    "name": "endDate"
+                }, 
+                {
+                    "type": "String", 
+                    "name": "startIndex"
+                }, 
+                {
+                    "type": "String", 
+                    "name": "endIndex"
+                }, 
+                {
+                    "type": "String", 
+                    "name": "sortBy"
+                }, 
+                {
+                    "type": "String", 
+                    "name": "sortOrder"
+                }
+            ], 
+            "visibility": "PUBLIC", 
+            "references": [], 
+            "location": {
+                "column": 19, 
+                "line": 53
+            }, 
+            "returnType": "String", 
+            "type": null
+        }
+    ]
+}
